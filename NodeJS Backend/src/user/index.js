@@ -1,18 +1,9 @@
 const { Router } = require('express');
-const User = require('../../models/User');
+const { test } = require('./controller/user');
 
 const router = Router();
 
-//routing test
-router.get('/', async (req,res)=>{
-    try{
-        const result = await User.find();
-        console.log('result =>', result);
 
-        return res.send(result);
-    }catch (error) {
-        console.log(error);
-    }
-});
+router.get('/', test);
 
 module.exports = router;
