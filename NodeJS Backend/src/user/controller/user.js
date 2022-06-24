@@ -1,13 +1,39 @@
-const User = require("../../../models/User")
+const User = require("../../../models/User");
+const bcrypt = require('bcryptjs');
 
-async function test(req,res){
+//register API
+async function register(req,res){
+    try{
+        console.log(req.body); //body is a raw JSON file
 
-    const result = await User.find();
-    console.log('result =>', result);
+        //get name and email from request body
+        const {
+            name,
+            email,
+        } = req.body;
 
-    return res.send(result);
+        //encrypt the password and add salt
+        const salt = await bcrypt.genSalt(10);
+        const hashPassword = await bcrypt.hash(req.body.password, salt);
+
+        //create new user document
+        const user = new User({
+            name,
+            email,
+            password: hashPassword
+        });
+
+        //save user document in db
+        const added_user = await user.save();
+
+        console.log('addUserResult =>', user); //or added_user
+        return res.send(user);
+    }catch(error){
+        console.log(error);
+    }
+    
 }
 
 module.exports = {
-    test
+    register
   };
