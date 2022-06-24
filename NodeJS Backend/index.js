@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const cors = require('cors');
 
 const userRouter = require('./src/user/index');
+const contactRouter = require('./src/contact');
 
 //establish connection to Mongodb
 const DB_CONNECT = process.env.DB_CONNECT || "";
@@ -20,6 +21,7 @@ app.use(cors());
 app.use(express.json());
 
 app.use('/api/user', userRouter);
+app.use('/api/contact', contactRouter);
 
 
 app.listen(3000, () => console.log('Server running'));

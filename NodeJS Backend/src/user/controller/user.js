@@ -29,8 +29,8 @@ async function register(req,res){
         //save user document in db
         const added_user = await user.save();
 
-        console.log('addUserResult =>', user); //or added_user
-        return res.send(user);
+        console.log('addUserResult =>', added_user); //or user
+        return res.send(added_user);
         
     }catch(error){
         console.log(error);
