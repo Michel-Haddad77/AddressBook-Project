@@ -21,11 +21,5 @@ app.use(express.json());
 
 app.use('/api/user', userRouter);
 
-// app.get("/", async (req,res)=>{
-//     const result = await User.find();
-//     console.log('result =>', result);
-
-//     return res.send(result);
-// })
 
 app.listen(3000, () => console.log('Server running'));
