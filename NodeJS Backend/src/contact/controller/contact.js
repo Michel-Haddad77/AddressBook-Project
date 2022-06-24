@@ -59,6 +59,47 @@ async function getContacts(req,res){
 
         const contacts = await Contact.find({user_id: user_id});
         return res.send(contacts);
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+async function deleteContact(req,res){
+    try{
+        //fetch the contact to be deleted
+        const contact = await Contact.findOne({ _id: req.query.id });
+        if (!contact) return res.status(404).send("Contact not found");
+
+        const deleteResult = await contact.remove();
+
+        //delete contact id from the contact array in the user
+        await User.findOneAndUpdate({ _id: contact.user_id }, { $pull: { contacts: contact._id } });
+
+        return res.send("Contact removed");
+
+    }catch(error){
+        console.log(error);
+        res.status(500).send(error);
+    }
+}
+
+async function updateContact(req,res){
+    try{
+        const {
+            name,
+            email,
+            mobile,
+            rel_status,
+            lat,
+            long
+        } = req.body;
+
+        const updated_contact = await Contact.findByIdAndUpdate(req.query.id,{name,email,mobile,rel_status,lat,long});
+
+        return res.send(updated_contact);
+
     }catch(error){
         console.log(error);
         res.status(500).send(error);
@@ -67,5 +108,7 @@ async function getContacts(req,res){
 
 module.exports = {
     addContact,
-    getContacts
+    getContacts,
+    deleteContact,
+    updateContact
   };
