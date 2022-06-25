@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
 import Button from "../Components/Button";
+import {FaFilter} from "react-icons/fa";
 
 function Contacts(){
     const token = localStorage.getItem("token");
@@ -93,10 +94,10 @@ function Contacts(){
         
         <table>
             <tr>
-                <th>Name</th>
-                <th>Mobile</th>
-                <th>Rel Status</th>
-                <th>Email</th>
+                <th>Name <FaFilter/></th>
+                <th>Mobile <FaFilter/></th>
+                <th>Rel Status <FaFilter/></th>
+                <th>Email <FaFilter/></th>
                 <th>Location</th>
             </tr>
             {contacts.map((contact) => {
