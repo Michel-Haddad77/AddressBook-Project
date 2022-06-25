@@ -6,6 +6,7 @@ import axios from "axios";
 function Login(){
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
 
     function login(){
@@ -51,15 +52,22 @@ function Login(){
                     setEmail(e.target.value);
                 }}
                 required
-            ></input><br/>
+            /><br/>
             <input 
-                type="password" 
+                type={showPass? "text":"password"} 
                 placeholder="Password"
                 
                 onChange={(e) => {
                     setPassword(e.target.value);
                 }}
-            ></input><br/>
+            /><br/>
+            <div>
+                <input type="checkbox" 
+                    onChange={(e) => {
+                        setShowPass(!showPass)
+                    }} />
+                <label>Show Password</label>
+            </div>
             <Button type ="submit" text="Login"/>
             <h4>New account? <Link to="/signup">Sign Up</Link></h4>
         </form>

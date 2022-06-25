@@ -7,6 +7,7 @@ function SignUp(){
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [showPass, setShowPass] = useState(false);
     const navigate = useNavigate();
 
     function signUp(){
@@ -54,13 +55,20 @@ function SignUp(){
                 }}
             /><br/>
             <input 
-                type="password"
+                type={showPass? "text":"password"} 
                 placeholder="Password"
                 value={password}
                 onChange={(e) => {
                     setPassword(e.target.value);
                 }}
             /><br/>
+            <div>
+                <input type="checkbox" 
+                    onChange={(e) => {
+                        setShowPass(!showPass)
+                    }} />
+                <label>Show Password</label>
+            </div>
             <Button type="submit" text="Sign Up" />
             <h4>Already have an account? <Link to="/">Login</Link></h4>
         </form>
