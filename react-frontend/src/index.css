@@ -31,7 +31,7 @@ body {
   font-size: 2em ;
 }
 
-.login-container > input{
+input{
   line-height: 2;
 }
 
@@ -44,6 +44,7 @@ body {
 }
 
 table {
+  margin-top: 20px;
   border-collapse: collapse;
   width: 100%;
 }
@@ -56,4 +57,11 @@ td, th {
 
 tr:nth-child(even) {
   background-color: #dddddd;
+}
+
+.contact-form{
+  display: flex;
+  gap: 10px;
+  margin: 30px auto;
+  width: fit-content;
 }

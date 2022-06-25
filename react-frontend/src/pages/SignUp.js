@@ -47,7 +47,7 @@ function SignUp(){
                     onChange={(e) => {
                         setName(e.target.value);
                     }}    
-                ></input><br/>
+                /><br/>
                 <input 
                     type="text" 
                     placeholder="Email address"
