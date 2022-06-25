@@ -35,43 +35,45 @@ function SignUp(){
     }
 
     return(
-        <form className="login-container"onSubmit={(e) => {
-            e.preventDefault();
-            signUp();
-        }}>
-            <h3 className="login-h3">Sign Up</h3>
-            <input 
-                type="text" 
-                placeholder="Name"
-                onChange={(e) => {
-                    setName(e.target.value);
-                }}    
-            ></input><br/>
-            <input 
-                type="text" 
-                placeholder="Email address"
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                }}
-            /><br/>
-            <input 
-                type={showPass? "text":"password"} 
-                placeholder="Password"
-                value={password}
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-            /><br/>
-            <div>
-                <input type="checkbox" 
+        <div className="login-background">
+            <form className="login-container" onSubmit={(e) => {
+                e.preventDefault();
+                signUp();
+            }}>
+                <h3 className="login-h3">Sign Up</h3>
+                <input 
+                    type="text" 
+                    placeholder="Name"
                     onChange={(e) => {
-                        setShowPass(!showPass)
-                    }} />
-                <label>Show Password</label>
-            </div>
-            <Button type="submit" text="Sign Up" />
-            <h4>Already have an account? <Link to="/">Login</Link></h4>
-        </form>
+                        setName(e.target.value);
+                    }}    
+                ></input><br/>
+                <input 
+                    type="text" 
+                    placeholder="Email address"
+                    onChange={(e) => {
+                        setEmail(e.target.value);
+                    }}
+                /><br/>
+                <input 
+                    type={showPass? "text":"password"} 
+                    placeholder="Password"
+                    value={password}
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                    }}
+                /><br/>
+                <div>
+                    <input type="checkbox" 
+                        onChange={(e) => {
+                            setShowPass(!showPass)
+                        }} />
+                    <label>Show Password</label>
+                </div>
+                <Button type="submit" text="Sign Up" />
+                <h4>Already have an account? <Link to="/">Login</Link></h4>
+            </form>
+        </div>
     );
 };
 

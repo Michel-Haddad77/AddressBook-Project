@@ -21,10 +21,10 @@ body {
   padding:3%;
   width: fit-content;
   margin: auto;
-  margin-top: 10%;
+
   border: 1px solid grey;
   border-radius: 15px;
-  
+  background-color: white;
 }
 
 .login-h3{
@@ -33,4 +33,12 @@ body {
 
 .login-container > input{
   line-height: 2;
+}
+
+.login-background{
+  background: url("./assets/background.jpg") no-repeat center center fixed;
+  background-size: cover;
+  height: 100vh;
+  margin: 0;
+  padding-top: 100px;
 }

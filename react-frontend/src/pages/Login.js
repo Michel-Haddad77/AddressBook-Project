@@ -31,7 +31,7 @@ function Login(){
             let id = response.data.id;
             localStorage.setItem("id", id);
 
-            // navigate("/all_surveys");
+            navigate("/contacts");
         })
         .catch(function (error){
             console.log(error);
@@ -39,38 +39,40 @@ function Login(){
     }
 
     return (
-        <form className="login-container" onSubmit={(e) => {
-            e.preventDefault();
-            login();
-        }}>
-            <h3 className="login-h3">Login</h3>
-            <input 
-                type="text" 
-                placeholder="Email address"
-                
-                onChange={(e) => {
-                    setEmail(e.target.value);
-                }}
-                required
-            /><br/>
-            <input 
-                type={showPass? "text":"password"} 
-                placeholder="Password"
-                
-                onChange={(e) => {
-                    setPassword(e.target.value);
-                }}
-            /><br/>
-            <div>
-                <input type="checkbox" 
+        <div className="login-background">
+            <form className="login-container" onSubmit={(e) => {
+                e.preventDefault();
+                login();
+            }}>
+                <h3 className="login-h3">Login</h3>
+                <input 
+                    type="text" 
+                    placeholder="Email address"
+                    
                     onChange={(e) => {
-                        setShowPass(!showPass)
-                    }} />
-                <label>Show Password</label>
-            </div>
-            <Button type ="submit" text="Login"/>
-            <h4>New account? <Link to="/signup">Sign Up</Link></h4>
-        </form>
+                        setEmail(e.target.value);
+                    }}
+                    required
+                /><br/>
+                <input 
+                    type={showPass? "text":"password"} 
+                    placeholder="Password"
+                    
+                    onChange={(e) => {
+                        setPassword(e.target.value);
+                    }}
+                /><br/>
+                <div>
+                    <input type="checkbox" 
+                        onChange={(e) => {
+                            setShowPass(!showPass)
+                        }} />
+                    <label>Show Password</label>
+                </div>
+                <Button type ="submit" text="Login"/>
+                <h4>New account? <Link to="/signup">Sign Up</Link></h4>
+            </form>
+        </div>
     )
 }
 
