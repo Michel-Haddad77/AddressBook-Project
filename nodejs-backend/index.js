@@ -23,5 +23,5 @@ app.use(express.json());
 app.use('/api/user', userRouter);
 app.use('/api/contact', contactRouter);
 
-
-app.listen(3000, () => console.log('Server running'));
+//change port to 8080
+app.listen(8080, () => console.log('Server running on 8080'));
