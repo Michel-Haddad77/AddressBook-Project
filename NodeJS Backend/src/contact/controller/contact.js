@@ -96,7 +96,8 @@ async function updateContact(req,res){
             long
         } = req.body;
 
-        const updated_contact = await Contact.findByIdAndUpdate(req.query.id,{name,email,mobile,rel_status,lat,long});
+        //update the contact and return it updated
+        const updated_contact = await Contact.findByIdAndUpdate(req.query.id,{name,email,mobile,rel_status,lat,long}, {new:true});
 
         return res.send(updated_contact);
 
