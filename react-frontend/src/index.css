@@ -57,7 +57,9 @@ td {
 }
 
 th{
-  
+  border-bottom: 2px solid rgb(83, 4, 119);
+  text-align: left;
+  padding: 8px;
 }
 
 tr:nth-child(even) {
@@ -102,4 +104,8 @@ tr:nth-child(even) {
   margin-left: 90%;
   background-color: red;
   margin-top: 10px;
+}
+
+.delete-btn{
+  margin-left: 30%;
 }

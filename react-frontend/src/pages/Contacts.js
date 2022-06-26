@@ -2,7 +2,7 @@ import axios from "axios";
 import { useState,useEffect, } from "react";
 import { useNavigate } from "react-router-dom";
 import Button from "../Components/Button";
-import {FaFilter, FaWindowClose} from "react-icons/fa";
+import {FaFilter, FaWindowClose, FaTrash} from "react-icons/fa";
 import Map from "../Components/Map";
 
 function Contacts(){
@@ -64,13 +64,31 @@ function Contacts(){
 
     //function for show on map button
     function showOnMap(coordinates){
+        //display the popup
         setShowMap(true);
+        //change location to the contact's coordinates
         setLoc(coordinates);
     }
 
     function logout(){
         localStorage.clear();
         navigate("/");
+    }
+
+    function deleteContact(id){
+        axios({
+            method: 'delete',
+            url: 'http://localhost:8080/api/contact/delete_contact',
+            params: { contact_id: id },
+            data: {id: localStorage.getItem("id")},
+            headers: {
+                "Authorization": token,
+            }
+        }).then(function (response) {
+            alert(response.data);
+        }).catch(function (error){
+            console.log(error);
+        })
     }
 
     return(
@@ -134,7 +152,8 @@ function Contacts(){
                         <td><Button type="button" text ={"Show on Map"} 
                                 onClick={()=>{showOnMap([ Number(contact.long), Number(contact.lat)])
                             }}/>
-                        </td>
+                           <FaTrash className="delete-btn" onClick={()=>{deleteContact(contact._id)}}/> 
+                        </td>   
                     </tr>
                 );
             })}

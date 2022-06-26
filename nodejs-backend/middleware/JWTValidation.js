@@ -8,8 +8,8 @@ function JWTMiddleware(){
        
         try{
             const verified = jwt.verify(token, TOKEN_SECRET);
-            //check if verified token id is the same as the user id in url params
-            if(verified._id === req.query.id){
+            //check if verified token id is the same as the user id in url params or body
+            if(verified._id === (req.query.id || req.body.id)){
                 next();
             }else{
                 return res.status(401).send("Unauthorized Token");

@@ -69,7 +69,7 @@ async function getContacts(req,res){
 async function deleteContact(req,res){
     try{
         //fetch the contact to be deleted
-        const contact = await Contact.findOne({ _id: req.query.id });
+        const contact = await Contact.findOne({ _id: req.query.contact_id });
         if (!contact) return res.status(404).send("Contact not found");
 
         const deleteResult = await contact.remove();
