@@ -73,11 +73,14 @@ async function deleteContact(req,res){
         if (!contact) return res.status(404).send("Contact not found");
 
         const deleteResult = await contact.remove();
-
+        console.log(deleteResult);
         //delete contact id from the contact array in the user
         await User.findOneAndUpdate({ _id: contact.user_id }, { $pull: { contacts: contact._id } });
 
-        return res.send("Contact removed");
+        return res.send({
+            msg:"Contact removed",
+            deleted: deleteResult
+        });
 
     }catch(error){
         console.log(error);

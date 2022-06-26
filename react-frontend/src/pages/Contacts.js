@@ -18,6 +18,8 @@ function Contacts(){
     const [email, setEmail] = useState("");
     const [show_map, setShowMap] = useState(false);
     const [loc, setLoc] = useState([33.893106, 35.480221]);
+    //const [search, setSearch] = useState("");
+    //const [filtered, setFiltered] = useState([]);
     const navigate = useNavigate();
 
     //get all contacts
@@ -70,22 +72,24 @@ function Contacts(){
         setLoc(coordinates);
     }
 
+    //function when user log out
     function logout(){
         localStorage.clear();
         navigate("/");
     }
 
+    //function when user deletes a contact
     function deleteContact(id){
         axios({
             method: 'delete',
             url: 'http://localhost:8080/api/contact/delete_contact',
             params: { contact_id: id },
-            data: {id: localStorage.getItem("id")},
+            data: {id: localStorage.getItem("id")}, //for middleware
             headers: {
                 "Authorization": token,
             }
         }).then(function (response) {
-            alert(response.data);
+            alert(response.data.msg);
         }).catch(function (error){
             console.log(error);
         })
@@ -130,6 +134,14 @@ function Contacts(){
             />
             <Button type = "submit" text={"Add new Contact"} />
         </form>
+
+        <input 
+            type="text" 
+            placeholder="Search"
+            onChange={(e) => {
+                setSearch(e.target.value);
+            }}
+        />
         
         <table>
         <thead>
