@@ -5,6 +5,8 @@ import {FaFilter, FaWindowClose} from "react-icons/fa";
 import Map from "../Components/Map";
 
 function Contacts(){
+    window.dispatchEvent(new Event('resize'));
+
     const token = localStorage.getItem("token");
 
     const [contacts, setContacts] = useState([]);
@@ -13,7 +15,7 @@ function Contacts(){
     const [rel_status, setRelStatus] = useState("");
     const [email, setEmail] = useState("");
     const [show_map, setShowMap] = useState(false);
-    const [loc, setLoc] = useState(['33.893106','35.480221']);
+    const [loc, setLoc] = useState([33.893106, 35.480221]);
 
     //get all contacts
     useEffect(()=>{
@@ -119,7 +121,7 @@ function Contacts(){
                         <td>{contact.rel_status}</td>
                         <td>{contact.email}</td>
                         <td><Button type="button" text ={"Show on Map"} 
-                                onClick={()=>{showOnMap([contact.long, contact.lat])
+                                onClick={()=>{showOnMap([ Number(contact.long), Number(contact.lat)])
                             }}/>
                         </td>
                     </tr>
@@ -129,8 +131,8 @@ function Contacts(){
         </table>
 
         <div className={show_map? "show-modal":"hide-modal"} >
+            <FaWindowClose className="close-icon" onClick={()=> setShowMap(false)} />
             <div className="leaflet-container">
-                <FaWindowClose onClick={()=> setShowMap(false)} />
                 <Map coordinates ={loc}/>
             </div>
         </div>
