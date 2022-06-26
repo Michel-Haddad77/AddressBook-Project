@@ -139,7 +139,7 @@ function Contacts(){
             type="text" 
             placeholder="Search"
             onChange={(e) => {
-                setSearch(e.target.value);
+                //setSearch(e.target.value);
             }}
         />
         
