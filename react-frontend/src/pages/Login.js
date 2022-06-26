@@ -2,7 +2,6 @@ import Button from "../Components/Button";
 import { Link, useNavigate } from "react-router-dom";
 import { useState } from "react";
 import axios from "axios";
-import Map from "../Components/Map";
 
 function Login(){
     const [email, setEmail] = useState("");
@@ -73,9 +72,6 @@ function Login(){
                 <Button type ="submit" text="Login"/>
                 <h4>New account? <Link to="/signup">Sign Up</Link></h4>
             </form>
-            <div className="leaflet-container">
-            <Map />
-            </div>
             
         </div>
     )

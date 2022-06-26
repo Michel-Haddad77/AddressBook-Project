@@ -1,7 +1,8 @@
 import axios from "axios";
 import { useState,useEffect } from "react";
 import Button from "../Components/Button";
-import {FaFilter} from "react-icons/fa";
+import {FaFilter, FaWindowClose} from "react-icons/fa";
+import Map from "../Components/Map";
 
 function Contacts(){
     const token = localStorage.getItem("token");
@@ -11,6 +12,8 @@ function Contacts(){
     const [mobile, setMobile] = useState("");
     const [rel_status, setRelStatus] = useState("");
     const [email, setEmail] = useState("");
+    const [show_map, setShowMap] = useState(false);
+    const [loc, setLoc] = useState(['33.893106','35.480221']);
 
     //get all contacts
     useEffect(()=>{
@@ -53,6 +56,11 @@ function Contacts(){
         })
     }
 
+    function showOnMap(coordinates){
+        setShowMap(true);
+        setLoc(coordinates);
+    }
+
     return(
         <>
         <form className="contact-form"
@@ -93,6 +101,7 @@ function Contacts(){
         </form>
         
         <table>
+        <thead>
             <tr>
                 <th>Name <FaFilter/></th>
                 <th>Mobile <FaFilter/></th>
@@ -100,18 +109,31 @@ function Contacts(){
                 <th>Email <FaFilter/></th>
                 <th>Location</th>
             </tr>
+        </thead>
+        <tbody>
             {contacts.map((contact) => {
                 return (
-                    <tr>
+                    <tr key = {contact._id}>
                         <td>{contact.name}</td>
                         <td>{contact.mobile}</td>
                         <td>{contact.rel_status}</td>
                         <td>{contact.email}</td>
-                        <td><Button type="button" text ={"Show on Map"} /></td>
+                        <td><Button type="button" text ={"Show on Map"} 
+                                onClick={()=>{showOnMap([contact.long, contact.lat])
+                            }}/>
+                        </td>
                     </tr>
                 );
             })}
+        </tbody>
         </table>
+
+        <div className={show_map? "show-modal":"hide-modal"} >
+            <div className="leaflet-container">
+                <FaWindowClose onClick={()=> setShowMap(false)} />
+                <Map coordinates ={loc}/>
+            </div>
+        </div>
         </>
     )
 }
