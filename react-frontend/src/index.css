@@ -65,3 +65,9 @@ tr:nth-child(even) {
   margin: 30px auto;
   width: fit-content;
 }
+
+/* Leaflet  */
+.leaflet-container {
+  width: 400px;
+  height: 400px;
+}
