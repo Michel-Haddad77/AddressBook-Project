@@ -1,5 +1,6 @@
 import axios from "axios";
-import { useState,useEffect } from "react";
+import { useState,useEffect, } from "react";
+import { useNavigate } from "react-router-dom";
 import Button from "../Components/Button";
 import {FaFilter, FaWindowClose} from "react-icons/fa";
 import Map from "../Components/Map";
@@ -9,6 +10,7 @@ function Contacts(){
 
     const token = localStorage.getItem("token");
 
+    //States
     const [contacts, setContacts] = useState([]);
     const [name, setName] = useState("");
     const [mobile, setMobile] = useState("");
@@ -16,6 +18,7 @@ function Contacts(){
     const [email, setEmail] = useState("");
     const [show_map, setShowMap] = useState(false);
     const [loc, setLoc] = useState([33.893106, 35.480221]);
+    const navigate = useNavigate();
 
     //get all contacts
     useEffect(()=>{
@@ -34,6 +37,7 @@ function Contacts(){
         })
     },[])
 
+    //function for add contact button
     function addContact(){
         let data = {
             "name":name,
@@ -58,13 +62,20 @@ function Contacts(){
         })
     }
 
+    //function for show on map button
     function showOnMap(coordinates){
         setShowMap(true);
         setLoc(coordinates);
     }
 
+    function logout(){
+        localStorage.clear();
+        navigate("/");
+    }
+
     return(
         <>
+        <Button text = {"Logout"} styling="logout-btn" onClick={logout}/>
         <form className="contact-form"
             onSubmit={(e)=>{
                 e.preventDefault();

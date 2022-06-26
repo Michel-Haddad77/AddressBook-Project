@@ -9,9 +9,10 @@ body {
   width: fit-content;
   padding: 5px 20px;
   border-radius: 5px;
-  background-color: cyan;
-  border-color: cyan;
+  background-color: rgb(83, 4, 119);
+  border-color: rgb(83, 4, 119);
   font-size: large;
+  color: white;
 }
 
 .login-container{
@@ -49,10 +50,14 @@ table {
   width: 100%;
 }
 
-td, th {
+td {
   border: 1px solid #dddddd;
   text-align: left;
   padding: 8px;
+}
+
+th{
+  
 }
 
 tr:nth-child(even) {
@@ -91,4 +96,10 @@ tr:nth-child(even) {
 .close-icon{
   cursor: pointer;
   float: right;
+}
+
+.logout-btn{
+  margin-left: 90%;
+  background-color: red;
+  margin-top: 10px;
 }

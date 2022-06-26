@@ -1,7 +1,7 @@
-function Button({text,onClick,type}){
+function Button({text,onClick,type,styling}){
     return(
         <button 
-            className="btn"
+            className={styling? "btn " + styling : "btn" }
             onClick={onClick}
             type = {type}
         >{text}</button>
