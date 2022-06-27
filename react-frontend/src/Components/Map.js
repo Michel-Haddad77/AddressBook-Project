@@ -1,5 +1,5 @@
 import { MapContainer, TileLayer, Marker, useMap, useMapEvents } from 'react-leaflet';
-import { useState, useRef, useMemo } from "react";
+import { useState, useRef, useMemo} from "react";
 import { Icon } from "leaflet";
 
 //for flying to contact location
@@ -18,22 +18,28 @@ function LocationMarker({coordinates}) {
     )
   }
 
-  //for adding new location
-  function DraggableMarker(setLoc) {
+//for adding new location
+function DraggableMarker({setLoc}) {
     const [position, setPosition] = useState([33.893106, 35.480221])
     const markerRef = useRef(null)
     const eventHandlers = useMemo(
-      () => ({
-        dragend() {
-          const marker = markerRef.current
-          if (marker != null) {
-            setPosition(marker.getLatLng());
-            setLoc(marker.getLatLng());
-          }
-        },
-      }),
-      [],
+        () => ({
+            dragend() {
+                const marker = markerRef.current
+                if (marker != null) {
+                setPosition(marker.getLatLng());
+                setLoc([marker.getLatLng().lat , marker.getLatLng().lng]);
+                console.log(marker.getLatLng().lat);
+                }
+            },
+        }),
+        [],
     )
+    const map = useMapEvents({
+        resize() {
+        map.flyTo(position, map.getZoom())
+      },
+    })
   
     return (
       <Marker
@@ -43,7 +49,7 @@ function LocationMarker({coordinates}) {
         ref={markerRef}>
       </Marker>
     )
-  } 
+} 
 
 function Map({coordinates, forAdding, setLoc}) {
     console.log("from map=>", coordinates);

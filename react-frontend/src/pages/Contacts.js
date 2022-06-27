@@ -47,8 +47,8 @@ function Contacts(){
             "mobile": mobile,
             "rel_status": rel_status,
             "email":email,
-            "lat": loc[0],
-            "long": loc[1]
+            "lat": loc[1],
+            "long": loc[0]
         }
 
         axios({
@@ -107,6 +107,7 @@ function Contacts(){
         })
     }
 
+    //function when user clicks on applyFilter
     function applyFilter(){
         setFiltered(contacts.filter((contact)=>{
             return contact.name.indexOf(search) > -1
@@ -151,7 +152,7 @@ function Contacts(){
                     setEmail(e.target.value);
                 }}
             />
-            <Button type="button" text={"Add Loc"} onClick={()=>{addLoc() }}/>
+            <Button type="button" text={"Add Loc"} onClick={addLoc}/>
             <Button type = "submit" text={"Add new Contact"} />
         </form>
 
@@ -198,6 +199,7 @@ function Contacts(){
             <div className="leaflet-container">
                 <Map coordinates ={loc} forAdding={add_or_show} setLoc={setLoc}/>
             </div>
+            {add_or_show && <Button text={"Confirm"} onClick={()=> setShowMap(false)} />}
         </div>
         </>
     )
