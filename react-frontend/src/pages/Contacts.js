@@ -102,6 +102,7 @@ function Contacts(){
             }
         }).then(function (response) {
             alert(response.data.msg);
+            setContacts(contacts.filter((cont)=> cont._id !== response.data.deleted._id));
         }).catch(function (error){
             console.log(error);
         })
@@ -110,9 +111,9 @@ function Contacts(){
     //function when user clicks on applyFilter
     function applyFilter(){
         setFiltered(contacts.filter((contact)=>{
-            return contact.name.indexOf(search) > -1
+            return contact.name.includes(search)
         }));
-        console.log(filtered);
+        console.log("filters " +search, filtered);
     }
 
     return(
