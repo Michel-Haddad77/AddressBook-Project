@@ -19,8 +19,8 @@ function Contacts(){
     const [show_map, setShowMap] = useState(false);
     const [add_or_show, setAddOrShow] = useState(false);
     const [loc, setLoc] = useState([33.893106, 35.480221]);
-    //const [search, setSearch] = useState("");
-    //const [filtered, setFiltered] = useState([]);
+    const [search, setSearch] = useState("");
+    const [filtered, setFiltered] = useState([]);
     const navigate = useNavigate();
 
     //get all contacts
@@ -107,6 +107,13 @@ function Contacts(){
         })
     }
 
+    function applyFilter(){
+        setFiltered(contacts.filter((contact)=>{
+            return contact.name.indexOf(search) > -1
+        }));
+        console.log(filtered);
+    }
+
     return(
         <>
         <Button text = {"Logout"} styling="logout-btn" onClick={logout}/>
@@ -152,9 +159,10 @@ function Contacts(){
             type="text" 
             placeholder="Search"
             onChange={(e) => {
-                //setSearch(e.target.value);
+                setSearch(e.target.value);
             }}
         />
+        <Button text={"Apply Filter"} onClick={applyFilter}/>
         
         <table>
         <thead>
