@@ -17,6 +17,7 @@ function Contacts(){
     const [rel_status, setRelStatus] = useState("");
     const [email, setEmail] = useState("");
     const [show_map, setShowMap] = useState(false);
+    const [add_or_show, setAddOrShow] = useState(false);
     const [loc, setLoc] = useState([33.893106, 35.480221]);
     //const [search, setSearch] = useState("");
     //const [filtered, setFiltered] = useState([]);
@@ -45,7 +46,9 @@ function Contacts(){
             "name":name,
             "mobile": mobile,
             "rel_status": rel_status,
-            "email":email
+            "email":email,
+            "lat": loc[0],
+            "long": loc[1]
         }
 
         axios({
@@ -64,12 +67,21 @@ function Contacts(){
         })
     }
 
+
     //function for show on map button
     function showOnMap(coordinates){
         //display the popup
         setShowMap(true);
         //change location to the contact's coordinates
         setLoc(coordinates);
+
+        setAddOrShow(false);
+    }
+
+    //function for add location button
+    function addLoc(){
+        setShowMap(true);
+        setAddOrShow(true);
     }
 
     //function when user log out
@@ -132,6 +144,7 @@ function Contacts(){
                     setEmail(e.target.value);
                 }}
             />
+            <Button type="button" text={"Add Loc"} onClick={()=>{addLoc() }}/>
             <Button type = "submit" text={"Add new Contact"} />
         </form>
 
@@ -175,7 +188,7 @@ function Contacts(){
         <div className={show_map? "show-modal":"hide-modal"} >
             <FaWindowClose className="close-icon" onClick={()=> setShowMap(false)} />
             <div className="leaflet-container">
-                <Map coordinates ={loc}/>
+                <Map coordinates ={loc} forAdding={add_or_show} setLoc={setLoc}/>
             </div>
         </div>
         </>
